@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  main:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: main
+      Runtime: go1.x
+      Events:
+        CatchAll:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
