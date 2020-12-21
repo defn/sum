@@ -2,20 +2,15 @@ package main
 
 import (
 	"encoding/json"
-	"log"
-	"net/http"
-	"os"
-
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"net/http"
 )
 
 type Coordinate struct {
 	X *int `json:"x,omitempty"`
 	Y *int `json:"y,omitempty"`
 }
-
-var errorLogger = log.New(os.Stderr, "ERROR ", log.Llongfile)
 
 func clientError(status int, body string) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
