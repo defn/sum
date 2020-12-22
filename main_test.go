@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-func testSum(t *testing.T, a, b, sum int) {
+func testSum(t *testing.T, a, b, expected int) {
 	res, err := handler(events.APIGatewayV2HTTPRequest{
 		Body:            fmt.Sprintf(`{"x": %d, "y": %d}`, a, b),
 		IsBase64Encoded: false,
@@ -21,17 +21,17 @@ func testSum(t *testing.T, a, b, sum int) {
 		t.Fatal(fmt.Sprintf("StatusCode should be 200, got %d", res.StatusCode))
 	}
 
-	var pair Coordinate
-	err = json.Unmarshal([]byte(res.Body), &pair)
+	var sum Answer
+	err = json.Unmarshal([]byte(res.Body), &sum)
 	if err != nil {
 		t.Fatal("Couldn't unmarshal json pair ")
 	}
 
-	if (*pair.X + *pair.Y) != sum {
-		t.Fatal("Sum should be should be ", sum)
+	if sum.Sum != expected {
+		t.Fatal("Sum should be should be ", expected, "got ", sum.Sum)
 	}
 
-	fmt.Printf("%d + %d = %d\n", a, b, sum)
+	fmt.Printf("%d + %d = %d\n", a, b, sum.Sum)
 }
 
 func TestHandler(t *testing.T) {
@@ -41,5 +41,6 @@ func TestHandler(t *testing.T) {
 		testSum(t, 100, 200, 300)
 		testSum(t, 500, 400, 900)
 		testSum(t, 1000, 2000, 3000)
+		testSum(t, 100, 900, 1000)
 	})
 }

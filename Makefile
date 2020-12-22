@@ -4,7 +4,7 @@ main: main.go
 	@$(MAKE) build
 
 api:
-	sam local start-api --warm-containers EAGER
+	sam local start-api --debug
 
 run:
 	go run main.go
