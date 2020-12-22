@@ -36,7 +36,7 @@ func handler(req events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse
 		return clientError(500, "Missing x or y")
 	}
 
-	sum.Sum = *pair.X + *pair.Y + 1
+	sum.Sum = *pair.X + *pair.Y
 
 	sm, err := json.Marshal(sum)
 	if err != nil {
