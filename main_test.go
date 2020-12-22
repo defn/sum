@@ -42,5 +42,6 @@ func TestHandler(t *testing.T) {
 		testSum(t, 500, 400, 900)
 		testSum(t, 1000, 2000, 3000)
 		testSum(t, 100, 900, 1000)
+		testSum(t, 99, 1, 100)
 	})
 }
