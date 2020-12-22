@@ -1,7 +1,4 @@
-FN := main
-
-test: main
-	@go test
+include Makefile.site
 
 main: main.go
 	@$(MAKE) build
@@ -24,5 +21,3 @@ package:
 
 clean:
 	rm -rf main.zip main
-
-include Makefile.site
